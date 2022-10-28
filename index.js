@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require('cors')
 const app = express();
 const port = process.env.port || 5000;
 
@@ -6,6 +7,7 @@ app.get('/', (req, res) =>{
     res.send("Simple Node Server Running....");
 });
 
+app.use(cors());
 
 const users = [
     {id:1, name: 'Sabana', email: 'sabana125@gmail.com'},
@@ -15,6 +17,10 @@ const users = [
 
 app.get('/users', (req, res) =>{
     res.send(users)
+})
+
+app.post('/users', (req, res) =>{
+    console.log("Post API Called");
 })
 app.listen(port, () =>{
     console.log(`Simple Node Server Running On Port Number: ${port}`);
