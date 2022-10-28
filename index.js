@@ -8,6 +8,7 @@ app.get('/', (req, res) =>{
 });
 
 app.use(cors());
+app.use(express.json())
 
 const users = [
     {id:1, name: 'Sabana', email: 'sabana125@gmail.com'},
@@ -16,11 +17,23 @@ const users = [
 ]
 
 app.get('/users', (req, res) =>{
-    res.send(users)
+    if(req.query.name){
+        // filter users by query
+        const search = req.query.name.toLowerCase();
+        const filtered = users.filter(usr => usr.name.indexOf(search) >= 0)
+        res.send(filtered)
+    }
+    else{
+        res.send(users)
+    }
 })
 
 app.post('/users', (req, res) =>{
-    console.log("Post API Called");
+    const user = req.body;
+    user.id = users.length + 1;
+    users.push(user)
+    console.log(user);
+    res.send(user)
 })
 app.listen(port, () =>{
     console.log(`Simple Node Server Running On Port Number: ${port}`);
