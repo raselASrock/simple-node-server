@@ -11,4 +11,9 @@ POST
 /* 
 QUERY
 path?name=value&name=value&name=value&name=value
+1. sign up mongoDB atlas
+2. create db user
+3. whitelist your ip address
+4. database>connect>show entire code> 
+5. npm i mongodb
 */
